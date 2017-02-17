@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {EpicAlertPopoverPage} from '../epic-alert-popover/epic-alert-popover'
-import { NavController, PopoverController } from 'ionic-angular';
+import { EpicAlertPopoverPage } from '../epic-alert-popover/epic-alert-popover'
+import { NavController, PopoverController, Platform } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -9,9 +9,11 @@ import { NavController, PopoverController } from 'ionic-angular';
 export class HomePage {
 
   constructor(
-  public navCtrl: NavController,
-  public popCtrl: PopoverController
+    public navCtrl: NavController,
+    public popCtrl: PopoverController,
+    public platform: Platform
   ) {
+    console.log(this.platform.width())
 
   }
   showAlerts(popEvent) {
@@ -25,5 +27,11 @@ export class HomePage {
     popover.present({
       ev: popEvent
     });
+
+    popover.onDidDismiss((data) => {
+      console.log(`Data from popover`, data)
+      if (data) {
+      }
+    })
   }
 }
